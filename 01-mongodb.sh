@@ -26,6 +26,8 @@ validate(){
     fi
 }
 
+echo "$(timestamp) [INFO] ==== Script started Execution =====" | tee -a $logs_file
+
 
 cp mongo.repo /etc/yum.repos.d/mongo.repo
 validate $? "Adding mongo repo"
@@ -42,3 +44,6 @@ validate $? "Updating remote connections to MongoDB"
 
 systemctl restart mongod
 validate $? "Restarting MongoDB"
+
+echo "$(timestamp) [INFO] Script completed in $SECONDS seconds"
+echo "$(timestamp) [INFO] ==== Script completed Execution =====" | tee -a $logs_file
